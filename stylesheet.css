@@ -1,0 +1,100 @@
+body {
+    margin:auto;
+    background-image:url(background.jpg);
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h2 {
+    font-family: monospace;
+    font-size: 40px;
+    margin-top: -30px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+h6 {
+    font-family: monospace;
+    text-align: center;
+    color: white;
+    width: 450px;
+    margin-top: 20px;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+}
+
+.content {
+    width: 450px;
+    margin-top: 10px;
+    margin: 40px auto;
+}
+
+.grid {
+    display: grid;
+    width: 450px;
+    grid-template-columns: repeat(9, auto);
+    margin-top: 10px;
+    margin: 10px auto;
+    border-radius: 5px;
+}
+
+.cell {
+    font-family: monospace;
+    background-color: darkgray;
+    width: 49px;
+    height: 49px;
+    line-height: 50px;
+    border: 1px solid;
+    cursor: pointer;
+    font-size: 60px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    text-align: center;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+    border-radius: 5%;
+    font-size: 25px;
+}
+
+.cell:hover{
+    color: white;
+}
+
+.numbers {
+    display: grid;
+    grid-template-columns: repeat(9, auto);
+    text-align: center;
+    width: 450px;
+    margin-top: 10px;
+    margin: 10px auto;
+}
+
+.btn-secondary {
+    width: 49px;
+    height: 49px;
+    line-height: 30px;
+    color: black;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+    border-color: black;
+    background-color: darkgray;
+    font-size: 25px;
+}
+
+.btn-secondary:hover{
+    color: white;
+    border-color: black;
+    border: 1px solid;
+}
+
+#revealSolution {
+    display: grid;
+    margin: auto;
+}
+
+#restartGame {
+    display: grid;
+    margin: auto;
+}
+
+@keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
