@@ -48,7 +48,6 @@ h6 {
     line-height: 50px;
     border: 1px solid;
     cursor: pointer;
-    font-size: 60px;
     transition-duration: 0.4s;
     cursor: pointer;
     text-align: center;
@@ -102,7 +101,6 @@ h6 {
     0% {
         transform: translateY(0);
     }
-
     100% {
         transform: translateY(-10px);
     }

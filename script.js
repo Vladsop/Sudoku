@@ -121,7 +121,7 @@ function checkSudokuRules(id) {
         for (let j = columnCoordinate; j <= maxColumn; ++j) {
             let grid3x3Cells = document.getElementById(i.toString() + j.toString());
             if (grid3x3Cells.style.backgroundColor != "red") {
-            grid3x3Cells.style.backgroundColor = "deepskyblue";
+            grid3x3Cells.style.backgroundColor = "#0dcaf0";
             setTimeout(function () {grid3x3Cells.style.backgroundColor = "lightgray";}, 1000);
             }
             if (cell.innerHTML === grid3x3Cells.innerHTML) {
@@ -132,7 +132,7 @@ function checkSudokuRules(id) {
     for (let i = 1; i <= 9; ++i) { //checking Lines
         let lineCells = document.getElementById(line.toString() + i.toString());
         if (lineCells.style.backgroundColor != "red") {
-            lineCells.style.backgroundColor = "deepskyblue";
+            lineCells.style.backgroundColor = "#0dcaf0";
             setTimeout(function () {lineCells.style.backgroundColor = "lightgray";}, 1000);
         }
         if (cell.innerHTML === lineCells.innerHTML) {
@@ -142,7 +142,7 @@ function checkSudokuRules(id) {
     for (let i = 1; i <= 9; ++i) { //checking Columns
         let columnCells = document.getElementById(i.toString() + column.toString());
         if (columnCells.style.backgroundColor != "red") {
-        columnCells.style.backgroundColor = "deepskyblue";
+        columnCells.style.backgroundColor = "#0dcaf0";
         setTimeout(function () {columnCells.style.backgroundColor = "lightgray";}, 1000);
         }
         if (cell.innerHTML === columnCells.innerHTML) {
