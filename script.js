@@ -12,6 +12,12 @@ window.onload = function generateGrid() {
             cell.className = "cell";
             cell.id = line.toString() + column;
             container.appendChild(cell);
+            if (cell.id < 71 && cell.id % 30 >= 1 && cell.id % 30 <= 9) {
+                cell.style.borderBottom = "3px solid";
+            }
+            if (cell.id % 10 === 3 || cell.id % 10 === 6) {
+                cell.style.borderRight = "3px solid";
+            }
         }
     }
     let cells = document.getElementsByClassName("cell");
@@ -40,6 +46,7 @@ window.onload = function generateGrid() {
                 document.getElementById(id).innerHTML = selectedNumber;
                 buttons[selectedNumber].style.backgroundColor = "darkgray";
                 buttons[selectedNumber].style.color = "black";
+                selectedNumber = null;
                 checkSudokuRules(id);
                 gameStatus();
             }
@@ -112,23 +119,39 @@ function checkSudokuRules(id) {
     let maxLine = lineCoordinate + 2, maxColumn = columnCoordinate + 2, counter = 0;
     for (let i = lineCoordinate; i <= maxLine; ++i) { //checking 3x3grid;
         for (let j = columnCoordinate; j <= maxColumn; ++j) {
-            if (cell.innerHTML === document.getElementById(i.toString() + j.toString()).innerHTML) {
+            let grid3x3Cells = document.getElementById(i.toString() + j.toString());
+            if (grid3x3Cells.style.backgroundColor != "red") {
+            grid3x3Cells.style.backgroundColor = "deepskyblue";
+            setTimeout(function () {grid3x3Cells.style.backgroundColor = "lightgray";}, 1000);
+            }
+            if (cell.innerHTML === grid3x3Cells.innerHTML) {
                 ++counter;
             }
         }
     }
     for (let i = 1; i <= 9; ++i) { //checking Lines
-        if (cell.innerHTML === document.getElementById(line.toString() + i.toString()).innerHTML) {
+        let lineCells = document.getElementById(line.toString() + i.toString());
+        if (lineCells.style.backgroundColor != "red") {
+            lineCells.style.backgroundColor = "deepskyblue";
+            setTimeout(function () {lineCells.style.backgroundColor = "lightgray";}, 1000);
+        }
+        if (cell.innerHTML === lineCells.innerHTML) {
             ++counter;
         }
     }
     for (let i = 1; i <= 9; ++i) { //checking Columns
-        if (cell.innerHTML === document.getElementById(i.toString() + column.toString()).innerHTML) {
+        let columnCells = document.getElementById(i.toString() + column.toString());
+        if (columnCells.style.backgroundColor != "red") {
+        columnCells.style.backgroundColor = "deepskyblue";
+        setTimeout(function () {columnCells.style.backgroundColor = "lightgray";}, 1000);
+        }
+        if (cell.innerHTML === columnCells.innerHTML) {
             ++counter;
         }
     }
     if (counter > 3) {
         cell.style.backgroundColor = "red";
+        setTimeout(function () {cell.style.backgroundColor = "red";}, 1001);
         printMessage("You need to make a better selection!")
     }
 }
