@@ -1,6 +1,6 @@
-var boardNumbers = [];
-var shiftArray = [];
-var selectedNumber = null;
+var boardNumbers = []; //Stores all valid numbers of the Sudoku game in order to reveal them if requested later on.
+var shiftArray = []; //Stores all numbers to be inserted in one line when creating the random game board.
+var selectedNumber = null; //Stores the current selected number by the user to fill the empty cells.
 
 //Generates a random filled 9x9 game board according to the Sudoku game rules.
 window.onload = function generateGrid() {
