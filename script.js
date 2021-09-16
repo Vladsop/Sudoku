@@ -1,4 +1,5 @@
 var boardNumbers = []; //Stores all valid numbers of the Sudoku game in order to reveal them if requested later on.
+var shiftArray = []; //Stores all numbers to be inserted in one line when creating the random game board.
 var selectedNumber = null; //Stores the current selected number by the user to fill the empty cells.
 
 //Generates a random filled 9x9 game board according to the Sudoku game rules.
@@ -21,7 +22,7 @@ window.onload = function generateGrid() {
     }
     let cells = document.getElementsByClassName("cell");
     let shiftOffset = [0, 3, 3, 1, 3, 3, 1, 3, 3]; // standard pattern to shift randomly generated 9 numbers array
-    let fillArray = shiftNumbers(shiftOffset[0]);  // in order to prevent mixing same numbers on line/columns or 3x3 grid.
+    let fillArray = shiftNumbers(shiftOffset[0]); // in order to prevent mixing same numbers on line/columns or 3x3 grid.
     for (let i = 1, j = 0; i <= 81; ++i) {
         boardNumbers[i - 1] = cells[i - 1].innerHTML = fillArray[j++];
         if (j > 8) {
@@ -47,7 +48,7 @@ window.onload = function generateGrid() {
                 buttons[selectedNumber].style.color = "black";
                 selectedNumber = null;
                 checkSudokuRules(id);
-                gameStatus();
+                updateGameStatus();
             }
         }
     }
@@ -80,7 +81,6 @@ function displayNumbers() {
 
 //Shifts and returns the array according to the transmited offset when generating the game.
 function shiftNumbers(offset) {
-    let shiftArray = []; //Stores all numbers to be inserted in one line when creating the random game board.
     if (shiftArray.length === 0) {
         let validNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         for (let i = 0; i < 9; ++i) {
@@ -120,9 +120,16 @@ function checkSudokuRules(id) {
     for (let i = lineCoordinate; i <= maxLine; ++i) { //checking 3x3grid;
         for (let j = columnCoordinate; j <= maxColumn; ++j) {
             let grid3x3Cells = document.getElementById(i.toString() + j.toString());
-            if (grid3x3Cells.style.backgroundColor != "red") {
-            grid3x3Cells.style.backgroundColor = "#0dcaf0";
-            setTimeout(function () {grid3x3Cells.style.backgroundColor = "lightgray";}, 1000);
+            if (grid3x3Cells.style.backgroundColor != "red" && grid3x3Cells.style.backgroundColor != "lightgreen") {
+                grid3x3Cells.style.backgroundColor = "#0dcaf0";
+                setTimeout(function() {
+                    if (grid3x3Cells.innerHTML === "") {
+                        grid3x3Cells.style.backgroundColor = "lightgray";
+                    } else {
+                        grid3x3Cells.style.backgroundColor = "darkgray";
+                    }
+                    document.getElementById(id).style.backgroundColor = "lightgreen";
+                }, 1000);
             }
             if (cell.innerHTML === grid3x3Cells.innerHTML) {
                 ++counter;
@@ -131,9 +138,16 @@ function checkSudokuRules(id) {
     }
     for (let i = 1; i <= 9; ++i) { //checking Lines
         let lineCells = document.getElementById(line.toString() + i.toString());
-        if (lineCells.style.backgroundColor != "red") {
+        if (lineCells.style.backgroundColor != "red" && lineCells.style.backgroundColor != "lightgreen") {
             lineCells.style.backgroundColor = "#0dcaf0";
-            setTimeout(function () {lineCells.style.backgroundColor = "lightgray";}, 1000);
+            setTimeout(function() {
+                if (lineCells.innerHTML === "") {
+                    lineCells.style.backgroundColor = "lightgray";
+                } else {
+                    lineCells.style.backgroundColor = "darkgray";
+                }
+                document.getElementById(id).style.backgroundColor = "lightgreen";
+            }, 1000);
         }
         if (cell.innerHTML === lineCells.innerHTML) {
             ++counter;
@@ -141,9 +155,16 @@ function checkSudokuRules(id) {
     }
     for (let i = 1; i <= 9; ++i) { //checking Columns
         let columnCells = document.getElementById(i.toString() + column.toString());
-        if (columnCells.style.backgroundColor != "red") {
-        columnCells.style.backgroundColor = "#0dcaf0";
-        setTimeout(function () {columnCells.style.backgroundColor = "lightgray";}, 1000);
+        if (columnCells.style.backgroundColor != "red" && columnCells.style.backgroundColor != "lightgreen") {
+            columnCells.style.backgroundColor = "#0dcaf0";
+            setTimeout(function() {
+                if (columnCells.innerHTML === "") {
+                    columnCells.style.backgroundColor = "lightgray";
+                } else {
+                    columnCells.style.backgroundColor = "darkgray";
+                }
+                document.getElementById(id).style.backgroundColor = "lightgreen";
+            }, 1000);
         }
         if (cell.innerHTML === columnCells.innerHTML) {
             ++counter;
@@ -151,13 +172,15 @@ function checkSudokuRules(id) {
     }
     if (counter > 3) {
         cell.style.backgroundColor = "red";
-        setTimeout(function () {cell.style.backgroundColor = "red";}, 1001);
+        setTimeout(function() {
+            cell.style.backgroundColor = "red";
+        }, 1001);
         printMessage("You need to make a better selection!")
     }
 }
 
 //When called checks the game status by counting all the filledValidCells(not empty and red flagged);
-function gameStatus() {
+function updateGameStatus() {
     let filledValidCells = 0;
     let cells = document.getElementsByClassName('cell');
     for (let i = 0; i < cells.length; ++i) {
@@ -177,7 +200,7 @@ function revealSolution() {
     let cells = document.getElementsByClassName("cell");
     for (let i = 0; i < cells.length; ++i) {
         cells[i].innerHTML = boardNumbers[i];
-        if(cells[i].style.backgroundColor === "red") {
+        if (cells[i].style.backgroundColor === "red") {
             cells[i].style.backgroundColor = "lightgray";
         }
         cells[i].onclick = null;
